@@ -53,8 +53,6 @@ request.onload = function () {
 
       let slider = document.querySelector('.slider');
       let sliderValue = slider.value;
-      
-
 
       const cards = card.map(function(car){
             return title + '|' + description + '|' + score;
@@ -62,23 +60,6 @@ request.onload = function () {
 
       console.log(cards);
 
-      slider.addEventListener('change', function () {
-          // let sliderValue = slider.value;
-          // let cards =  card;
-          // if (score > sliderValue) {
-          //   console.log(cards);
-          // } else {
-          //    console.clear(cards);
-          // }
-      }, false);
-
-      
-      
-      // function filterScore(sliderValue){
-      //   if (score > sliderValue) {  
-      //     console.log(card);
-      //   }
-      // } 
         
 
       
