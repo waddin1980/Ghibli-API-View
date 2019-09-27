@@ -82,3 +82,5 @@ function filterTitles() {
     }
   }
 }
+
+// try this - https://github.com/damian-balas/filterable-list/blob/master/main.js
