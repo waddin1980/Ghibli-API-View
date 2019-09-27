@@ -6,19 +6,19 @@ logo.src = 'logo.png';
 const container = document.createElement('div');
 container.setAttribute('class', 'container');
 
-const sliderWrap = document.createElement('div');
-sliderWrap.setAttribute('class', 'slider-wrap');
+const movieList = document.createElement('ul');
+movieList.setAttribute('id', 'movie-list')
 
-const slider = document.createElement('input');
-slider.setAttribute('class', 'slider');
-slider.setAttribute('type', 'range');
-slider.setAttribute('min', '1');
-slider.setAttribute('max', '100');
-slider.setAttribute('value', '5');
+const filterInput = document.createElement('input');
+filterInput.setAttribute('id', 'filterInput');
+filterInput.setAttribute('type', 'text');
+filterInput.setAttribute('placeholder', 'Search titles');
 
-container.appendChild(sliderWrap);
+const filterContainer = document.createElement('div');
+filterContainer.setAttribute('id', 'filterContainer');
 
-sliderWrap.appendChild(slider);
+container.appendChild(filterContainer);
+filterContainer.appendChild(filterInput);
 
 app.appendChild(logo);
 app.appendChild(container);
@@ -31,8 +31,9 @@ request.onload = function () {
   var data = JSON.parse(this.response);
   if (request.status >= 200 && request.status < 400) {
     data.forEach(movie => {
-      const cardWrap = document.createElement('div');
-      cardWrap.setAttribute('class', 'card');
+
+      const card = document.createElement('li');
+      card.setAttribute('class', 'card');
 
       const h1 = document.createElement('h1');
       h1.textContent = movie.title;
@@ -41,26 +42,10 @@ request.onload = function () {
       movie.description = movie.description.substring(0, 300);
       p.textContent = `${movie.description}...`;
 
-      container.appendChild(cardWrap);
-      cardWrap.appendChild(h1);
-      cardWrap.appendChild(p);
-
-      let title = movie.title;
-      let description = movie.description.substring(0, 300);
-      let score = movie.rt_score;
-  
-      let card = [{title, description, score}];
-
-      let slider = document.querySelector('.slider');
-      let sliderValue = slider.value;
-
-      const cards = card.map(function(car){
-            return title + '|' + description + '|' + score;
-      });
-
-      console.log(cards);
-
-        
+      container.appendChild(movieList);
+      movieList.appendChild(card);
+      card.appendChild(h1);
+      card.appendChild(p);
 
       
     });
@@ -72,3 +57,28 @@ request.onload = function () {
 }
 
 request.send();
+
+let filterInputSearch = document.getElementById('filterInput');
+
+filterInputSearch.addEventListener('keyup', filterTitles);
+
+function filterTitles() {
+  // get value of input 
+  let filterValue = document.getElementById('filterInput').value.toUpperCase();
+  
+  let ul = document.getElementById('movie-list');
+
+  let li = ul.querySelectorAll('li');
+
+  // go through the li items
+
+  for(let i=0;i < li.length;i++) {
+    let movieTitle = li[i].getElementsByTagName('h1')[0];
+    // if matched  
+    if (movieTitle.innerHTML.toUpperCase().indexOf(filterValue) > -1){
+      li[i].style.display = '';
+    } else {
+      li[i].style.display = 'none';
+    }
+  }
+}

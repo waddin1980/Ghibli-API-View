@@ -41,6 +41,25 @@ p {
   flex-wrap: wrap;
 }
 
+#filterContainer {
+  padding: 30px;
+  width: 100%;
+}
+
+#filterInput {
+  font-size: 14px;
+  padding: 10px;
+  max-width: 400px;
+  width: 100%;
+  border: 1px solid #262626;
+  background: #F6F6F6;
+}
+
+#movie-list {
+  padding: 0;
+  margin: 0;
+}
+
 .slider-wrap {
   padding: 30px;
   width: 100%;
