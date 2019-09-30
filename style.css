@@ -36,7 +36,8 @@ p {
   margin: 0;
 }
 
-.container {
+.container,
+#movie-list {
   display: flex;
   flex-wrap: wrap;
 }
