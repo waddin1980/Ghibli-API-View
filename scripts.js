@@ -23,12 +23,12 @@ filterContainer.appendChild(filterInput);
 app.appendChild(logo);
 app.appendChild(container);
 
-var request = new XMLHttpRequest();
+const request = new XMLHttpRequest();
 request.open('GET', 'https://ghibliapi.herokuapp.com/films', true);
 request.onload = function () {
 
   // Begin accessing JSON data here
-  var data = JSON.parse(this.response);
+  const data = JSON.parse(this.response);
   if (request.status >= 200 && request.status < 400) {
     data.forEach(movie => {
 
@@ -58,7 +58,7 @@ request.onload = function () {
 
 request.send();
 
-let filterInputSearch = document.getElementById('filterInput');
+const filterInputSearch = document.getElementById('filterInput');
 
 filterInputSearch.addEventListener('keyup', filterTitles);
 
@@ -66,14 +66,16 @@ function filterTitles() {
   // get value of input 
   let filterValue = document.getElementById('filterInput').value.toUpperCase();
   
-  let ul = document.getElementById('movie-list');
+  const ul = document.getElementById('movie-list');
 
-  let li = ul.querySelectorAll('li');
+  const li = ul.querySelectorAll('li');
 
   // go through the li items
 
   for(let i=0;i < li.length;i++) {
-    let movieTitle = li[i].getElementsByTagName('h1')[0];
+    const movieTitle = li[i].getElementsByTagName('h1')[0];
+
+    const card = document.querySelectorAll('.card');
     // if matched  
     if (movieTitle.innerHTML.toUpperCase().indexOf(filterValue) > -1){
       li[i].style.display = '';
@@ -81,6 +83,6 @@ function filterTitles() {
       li[i].style.display = 'none';
     }
   }
-}
+} // filterTitles
 
 // try this - https://github.com/damian-balas/filterable-list/blob/master/main.js
